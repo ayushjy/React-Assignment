@@ -1,11 +1,14 @@
 import React from 'react'
 import DisplayTable from './components/DisplayTable'
+import { Box } from '@mui/material';
 
 const App = () => {
   return (
-    <div>
-      <DisplayTable/>
-    </div>
+    <Box
+      mx={2}   
+    >
+      <DisplayTable />
+    </Box>
   )
 }
 

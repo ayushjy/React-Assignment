@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Box } from '@mui/material';
 import {
   Table,
   TableBody,
@@ -9,13 +10,12 @@ import {
   Paper,
   Button
 } from '@mui/material';
-import axios from 'axios';
 import Search from './Search';
 
 const DataTable = () => {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searh,setSearch]=useState();
 
   const fetchData = async () => {
     setLoading(true);
@@ -30,10 +30,14 @@ const DataTable = () => {
 
   return (
     <div>
+        <Box display="flex"justifyContent="space-between"
+      alignItems="center"
+      height="10vh">
       <Button variant="contained" color="primary" onClick={fetchData} disabled={loading}>
         {loading ? 'Loading...' : 'Load Data'}
       </Button>
-      <Search data={data}/>
+      <Search data={data} setFilteredData={setFilteredData}/>
+      </Box>
       <TableContainer component={Paper} style={{ marginTop: '20px' }}>
         <Table>
           <TableHead>
@@ -44,7 +48,7 @@ const DataTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row) => (
+            {filteredData.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.title}</TableCell>
